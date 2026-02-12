@@ -20,7 +20,7 @@ void main() {
     const params = CreateUserParams(
       createdAt: 'createdAt',
       name: 'name.',
-      avatar: 'avatar.',
+      avatar: 'avatar avatar avatar.',
     );
 
     when(
