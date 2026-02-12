@@ -9,7 +9,7 @@ class MockAuthRepo extends Mock implements AuthenticationRepository {}
 
 void main() {
   late CreateUserUsecase usecase;
-  late MockAuthRepo repository;  // Use Mock class as type
+  late MockAuthRepo repository; // Use Mock class as type
 
   setUp(() {
     repository = MockAuthRepo();
@@ -19,26 +19,29 @@ void main() {
   test('should call AuthRepo.createUser once', () async {
     const params = CreateUserParams(
       createdAt: 'createdAt',
-      name: 'name',
+      name: 'name.',
       avatar: 'avatar',
     );
 
-    when(() => repository.createUser(
-          createdAt: params.createdAt,
-          name: params.name,
-          avatar: params.avatar,
-        )).thenAnswer((_) async => const Right(null));
+    when(
+      () => repository.createUser(
+        createdAt: params.createdAt,
+        name: params.name,
+        avatar: params.avatar,
+      ),
+    ).thenAnswer((_) async => const Right(null));
 
     final result = await usecase(params);
 
-  
-    expect(result, const Right(null)); 
+    expect(result, const Right(null));
 
-    verify(() => repository.createUser(
-          createdAt: params.createdAt,
-          name: params.name,
-          avatar: params.avatar,
-        )).called(1);  
-        verifyNoMoreInteractions(repository);
+    verify(
+      () => repository.createUser(
+        createdAt: params.createdAt,
+        name: params.name,
+        avatar: params.avatar,
+      ),
+    ).called(1);
+    verifyNoMoreInteractions(repository);
   });
 }
